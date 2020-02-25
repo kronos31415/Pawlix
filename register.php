@@ -17,6 +17,7 @@
             <div class='column'>
 
                 <div class="header">
+                    <img src = "assets/img/pawlix.png"/>
                     <h3>Sign Up</h3>
                     <span>to register to Pawlix.</span>
                 </div>
@@ -29,6 +30,7 @@
                    <input type = "password" placeholder = "Password" name = "password" required>
                    <input type = "password" placeholder = "Confirm password" name = "password2" required>
                    <input type = "submit" name = "submitButton" value="SUBMIT">
+                   <a href="login.php" class = "signInMessage">Do You have account? Please sign in here</a>
                </form> 
             </div>
         </div>
