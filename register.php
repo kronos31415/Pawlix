@@ -1,14 +1,20 @@
 <?php
 require_once("includes/config.php");
 require_once("includes/classes/FormSanitazer.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/Account.php");
+
+$account = new Account($conn);
     if(isset($_POST['submitButton'])) {
         $firstName = FormSanitazer::sanitazeString($_POST['firstName']);
-        $lastNAme = FormSanitazer::sanitazeString($_POST['lastName']);
+        $lastName = FormSanitazer::sanitazeString($_POST['lastName']);
         $user = FormSanitazer::sanitazeUser($_POST['userName']);
         $email = FormSanitazer::sanitazeEmail($_POST['email']);
         $email2 = FormSanitazer::sanitazeEmail($_POST['email2']);
         $password = FormSanitazer::sanitazePassword($_POST['password']);
         $password2 = FormSanitazer::sanitazePassword($_POST['password2']);
+
+        $account->register($firstName, $lastName, $user, $email, $email2, $password, $password2);
     }
 ?>
 
@@ -29,13 +35,28 @@ require_once("includes/classes/FormSanitazer.php");
                     <span>to register to Pawlix.</span>
                 </div>
                <form method = "POST">
+                   <?php echo $account->getError(Constants::$firstNameError); ?>
                    <input type = "text" placeholder = "First Name" name = "firstName" required>
+
+                   <?php echo $account->getError(Constants::$lastNameError); ?>
                    <input type = "text" placeholder = "Last Name" name = "lastName" required> 
+
+                   <?php echo $account->getError(Constants::$userNameError); ?>
+                   <?php echo $account->getError(Constants::$userNameExist); ?>
                    <input type = "text" placeholder = "User Name" name = "userName" required>
+
+
                    <input type = "email" placeholder = "Emai" name = "email" required>
+
+
                    <input type = "email" placeholder = "Email" name = "email2" required>
+
+
                    <input type = "password" placeholder = "Password" name = "password" required>
+
+
                    <input type = "password" placeholder = "Confirm password" name = "password2" required>
+
                    <input type = "submit" name = "submitButton" value="SUBMIT">
                    <a href="login.php" class = "signInMessage">Do You have account? Please sign in here</a>
                </form> 
