@@ -1,6 +1,15 @@
 <?php
     if(isset($_POST['submitButton'])) {
-        echo "dupa";
+        $firstName = sanitazeString($_POST['firstName']);
+    }
+
+    function sanitazeString($inputString) {
+        $inputString = strip_tags($inputString);
+        $inputString = trim($inputString);
+        $inputString = strtolower($inputString);
+        $inputString = ucfirst($inputString);
+
+        return $inputString;
     }
 ?>
 
