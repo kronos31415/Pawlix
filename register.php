@@ -2,6 +2,12 @@
 require_once("includes/classes/FormSanitazer.php");
     if(isset($_POST['submitButton'])) {
         $firstName = FormSanitazer::sanitazeString($_POST['firstName']);
+        $lastNAme = FormSanitazer::sanitazeString($_POST['lastName']);
+        $user = FormSanitazer::sanitazeUser($_POST['userName']);
+        $email = FormSanitazer::sanitazeEmail($_POST['email']);
+        $email2 = FormSanitazer::sanitazeEmail($_POST['email2']);
+        $password = FormSanitazer::sanitazePassword($_POST['password']);
+        $password2 = FormSanitazer::sanitazePassword($_POST['password2']);
     }
 ?>
 
