@@ -1,18 +1,9 @@
 <?php
+require_once("includes/classes/FormSanitazer.php");
     if(isset($_POST['submitButton'])) {
-        $firstName = sanitazeString($_POST['firstName']);
-    }
-
-    function sanitazeString($inputString) {
-        $inputString = strip_tags($inputString);
-        $inputString = trim($inputString);
-        $inputString = strtolower($inputString);
-        $inputString = ucfirst($inputString);
-
-        return $inputString;
+        $firstName = FormSanitazer::sanitazeString($_POST['firstName']);
     }
 ?>
-
 
 <!DOCTYPE html>
 <html>
