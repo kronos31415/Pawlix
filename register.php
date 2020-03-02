@@ -45,16 +45,15 @@ $account = new Account($conn);
                    <?php echo $account->getError(Constants::$userNameExist); ?>
                    <input type = "text" placeholder = "User Name" name = "userName" required>
 
-
+                   <?php echo $account->getError(Constants::$emailsDontMatch); ?>
+                   <?php echo $account->getError(Constants::$emailWrongFormat); ?>
+                   <?php echo $account->getError(Constants::$emailExist); ?>
                    <input type = "email" placeholder = "Emai" name = "email" required>
-
-
                    <input type = "email" placeholder = "Email" name = "email2" required>
 
-
+                   <?php echo $account->getError(Constants::$passwordsDontMatch); ?>
+                   <?php echo $account->getError(Constants::$passwordLength); ?>
                    <input type = "password" placeholder = "Password" name = "password" required>
-
-
                    <input type = "password" placeholder = "Confirm password" name = "password2" required>
 
                    <input type = "submit" name = "submitButton" value="SUBMIT">
