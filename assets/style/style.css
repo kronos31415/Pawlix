@@ -82,3 +82,10 @@ body {
     margin: 10px auto;
     color: rgb(23, 136, 0);
 }
+
+.errorMessage {
+    color: #f00;
+    font-size: 12px;
+    font-weight: 300;
+    margin: auto;
+}
