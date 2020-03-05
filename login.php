@@ -1,6 +1,18 @@
 <?php
+require_once("includes/config.php");
+require_once("includes/classes/FormSanitazer.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/Account.php");
+$account = new Account($conn);
     if(isset($_POST['submitButton'])) {
-        echo "dupa";
+        $user = FormSanitazer::sanitazeUser($_POST['userName']);
+        $password = FormSanitazer::sanitazePassword($_POST['password']);
+
+        $success = $account->login($user, $password);
+        
+        if($success) {
+            header("Location: index.php");
+        }
     }
 ?>
 
@@ -22,6 +34,7 @@
                     <span>to register to Pawlix.</span>
                 </div>
                <form method = "POST">
+                   <?php echo $account->getError(Constants::$wrongLogin); ?>
                    <input type = "text" placeholder = "User Name" name = "userName" required>
                    <input type = "password" placeholder = "Password" name = "password" required>
                    <input type = "submit" name = "submitButton" value="SUBMIT">

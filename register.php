@@ -14,7 +14,10 @@ $account = new Account($conn);
         $password = FormSanitazer::sanitazePassword($_POST['password']);
         $password2 = FormSanitazer::sanitazePassword($_POST['password2']);
 
-        $account->register($firstName, $lastName, $user, $email, $email2, $password, $password2);
+        $success = $account->register($firstName, $lastName, $user, $email, $email2, $password, $password2);
+        if($success) {
+            header("Location: index.php");
+        }
     }
 ?>
 

@@ -13,6 +13,40 @@ class Account {
         $this->validateUserName($us);
         $this->validateEmails($email, $email2);
         $this->validatePasswords($pass, $pass2);
+
+        if(empty($this->errorArray)) {
+            return $this->insertUserData($fn, $ln, $us, $email,$pass);
+        }
+        return false;
+    }
+
+    public function login($us, $pass) {
+        $pass = hash("sha512", $pass);
+        $query = $this->conn->prepare("SELECT * FROM users WHERE password =:pass AND user=:user");
+        $query->bindValue(':pass', $pass);
+        $query->bindValue(':user', $us);
+        $query->execute();
+
+        if($query->rowCount() == 1) {
+            return true;
+        }
+        array_push($this->errorArray, Constants::$wrongLogin);
+        return false;
+
+    }
+
+    private function insertUserData($fn, $ln, $us, $email,$pass) {
+        $pass = hash("sha512", $pass);
+
+        $query = $this->conn->prepare("INSERT INTO users(firstName, lastName, username, email, password)
+                                     VALUES(:fn, :ln, :us, :email, :pass)");
+        $query->bindValue(":fn", $fn);
+        $query->bindValue(":ln", $ln);
+        $query->bindValue(":us", $us);
+        $query->bindValue(":email", $email);
+        $query->bindValue(":pass", $pass);
+
+        return $query->execute();
     }
 
     private function validateFirstName($fn) {
@@ -50,8 +84,8 @@ class Account {
             array_push($this->errorArray, Constants::$emailWrongFormat);
             return;
         }
-        $query = "SELECT * FROM users WHERE email=:email";
-        $query->bindValue('email', $email);
+        $query = $this->conn->prepare("SELECT * FROM users WHERE email=:email");
+        $query->bindValue(":email", $email);
         $query->execute();
         if($query->rowCount() != 0) {
             array_push($this->errorArray, Constants::$emailExist);
