@@ -16,7 +16,14 @@ $account = new Account($conn);
 
         $success = $account->register($firstName, $lastName, $user, $email, $email2, $password, $password2);
         if($success) {
-            header("Location: index.php");
+            $_SESSION['userLogedIn'] = $user;
+            header("Location: login.php");
+        }
+    }
+
+    function getInputValue($name) {
+        if(isset($_POST[$name])) {
+            echo $_POST[$name];
         }
     }
 ?>
@@ -39,20 +46,20 @@ $account = new Account($conn);
                 </div>
                <form method = "POST">
                    <?php echo $account->getError(Constants::$firstNameError); ?>
-                   <input type = "text" placeholder = "First Name" name = "firstName" required>
+                   <input type = "text" placeholder = "First Name" name = "firstName" value = "<?php getInputValue("firstName"); ?>" required>
 
                    <?php echo $account->getError(Constants::$lastNameError); ?>
-                   <input type = "text" placeholder = "Last Name" name = "lastName" required> 
+                   <input type = "text" placeholder = "Last Name" name = "lastName" value = "<?php getInputValue("lastName"); ?>" required> 
 
                    <?php echo $account->getError(Constants::$userNameError); ?>
                    <?php echo $account->getError(Constants::$userNameExist); ?>
-                   <input type = "text" placeholder = "User Name" name = "userName" required>
+                   <input type = "text" placeholder = "User Name" name = "userName" value = "<?php getInputValue("userName"); ?>" required>
 
                    <?php echo $account->getError(Constants::$emailsDontMatch); ?>
                    <?php echo $account->getError(Constants::$emailWrongFormat); ?>
                    <?php echo $account->getError(Constants::$emailExist); ?>
-                   <input type = "email" placeholder = "Emai" name = "email" required>
-                   <input type = "email" placeholder = "Email" name = "email2" required>
+                   <input type = "email" placeholder = "Emai" name = "email" value = "<?php getInputValue("email"); ?>" required>
+                   <input type = "email" placeholder = "Email" name = "email2" value = "<?php getInputValue("email2"); ?>" required>
 
                    <?php echo $account->getError(Constants::$passwordsDontMatch); ?>
                    <?php echo $account->getError(Constants::$passwordLength); ?>

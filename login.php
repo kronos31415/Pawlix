@@ -11,7 +11,13 @@ $account = new Account($conn);
         $success = $account->login($user, $password);
         
         if($success) {
+            $_SESSION['userLogedIn'] = $user;
             header("Location: index.php");
+        }
+    }
+    function getInputValue($name) {
+        if(isset($_POST[$name])) {
+            echo $_POST[$name];
         }
     }
 ?>
@@ -35,7 +41,7 @@ $account = new Account($conn);
                 </div>
                <form method = "POST">
                    <?php echo $account->getError(Constants::$wrongLogin); ?>
-                   <input type = "text" placeholder = "User Name" name = "userName" required>
+                   <input type = "text" placeholder = "User Name" name = "userName" value = "<?php getInputValue("userName") ?>" required>
                    <input type = "password" placeholder = "Password" name = "password" required>
                    <input type = "submit" name = "submitButton" value="SUBMIT">
                    <a href="register.php" class = "signInMessage">Don't have account yet? Please register here</a>

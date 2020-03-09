@@ -22,7 +22,7 @@ class Account {
 
     public function login($us, $pass) {
         $pass = hash("sha512", $pass);
-        $query = $this->conn->prepare("SELECT * FROM users WHERE password =:pass AND user=:user");
+        $query = $this->conn->prepare("SELECT * FROM users WHERE password =:pass AND userName=:user");
         $query->bindValue(':pass', $pass);
         $query->bindValue(':user', $us);
         $query->execute();
