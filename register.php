@@ -16,7 +16,7 @@ $account = new Account($conn);
 
         $success = $account->register($firstName, $lastName, $user, $email, $email2, $password, $password2);
         if($success) {
-            $_SESSION['userLogedIn'] = $user;
+            // $_SESSION['userLogedIn'] = $user;
             header("Location: login.php");
         }
     }
