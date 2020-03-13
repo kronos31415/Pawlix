@@ -26,6 +26,12 @@
                         <div class='previewOverlay'>
                             <div class='mainDetails'>
                                 <h3>$name</h3>
+
+                                <div class='buttons'>
+                                    <button>PLAY</button>
+                                    <button>VOLUME</button>
+                                </div>
+
                             </div>
                             
                         </div>
