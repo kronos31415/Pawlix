@@ -28,8 +28,8 @@
                                 <h3>$name</h3>
 
                                 <div class='buttons'>
-                                    <button>PLAY</button>
-                                    <button>VOLUME</button>
+                                    <button><i class='fas fa-play'></i>  PLAY</button>
+                                    <button><i class='fas fa-volume-mute'></i></button>
                                 </div>
 
                             </div>

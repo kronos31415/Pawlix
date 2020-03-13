@@ -132,3 +132,7 @@ body {
     margin-right: 15px;
     font-size: 15px;
 }
+
+.buttons i {
+    color: inherit;
+}
