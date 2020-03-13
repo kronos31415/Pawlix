@@ -14,6 +14,7 @@
     <head>
         <title>My pawlix clone Netflix</title>
         <link rel="stylesheet" type="text/css" href="assets/style/style.css"/>
+        <script src="https://kit.fontawesome.com/16fed3d78e.js" crossorigin="anonymous"></script>
     </head>
     
     <body>
