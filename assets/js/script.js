@@ -7,6 +7,7 @@ function volumeToogle(button) {
     $(button).find("i").toggleClass('fa-volume-up');
 }
 
-// $(document).ready(function() {
-
-// });
+function displayImage() {
+    $('.previewVideo').tooggle();
+    $('.previewImage').tooggle();
+}
