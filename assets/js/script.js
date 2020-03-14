@@ -8,6 +8,6 @@ function volumeToogle(button) {
 }
 
 function displayImage() {
-    $('.previewVideo').tooggle();
-    $('.previewImage').tooggle();
+    $('.previewVideo').toggle();
+    $('.previewImage').toggle();
 }
