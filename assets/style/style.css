@@ -11,6 +11,12 @@ body {
     box-sizing: border-box;
 }
 
+.wraper {
+    background-color: #141414;
+    min-width: 1000px;
+    min-height: 100%;
+}
+
 .signInContiner {
     display: flex;
     background-color: rgb(226, 226, 187);

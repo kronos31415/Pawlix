@@ -3,4 +3,7 @@
 
     $preview = new PreviewProvider($conn, $userLoggedIn);
     echo $preview->createPreviewVideo(null);
+
+    $container = new CategoryContainers($conn, $userLoggedIn);
+    echo $container->showCategories();
 ?>
