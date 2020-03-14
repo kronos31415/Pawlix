@@ -29,7 +29,7 @@
 
                                 <div class='buttons'>
                                     <button><i class='fas fa-play'></i>  PLAY</button>
-                                    <button><i class='fas fa-volume-mute'></i></button>
+                                    <button onclick='volumeToogle(this)'><i class='fas fa-volume-mute'></i></button>
                                 </div>
 
                             </div>

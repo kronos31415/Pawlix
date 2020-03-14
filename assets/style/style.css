@@ -131,8 +131,14 @@ body {
     padding: 10px 20px;
     margin-right: 15px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .buttons i {
     color: inherit;
+}
+
+.mainDetails button:hover {
+    background-color: #fff;
+    color: #000;
 }
