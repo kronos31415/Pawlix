@@ -12,5 +12,6 @@
     echo $preview->createPreviewVideo($entity);
 
     $seasonProvider = new SeasonProvider($conn, $userLoggedIn);
-    $seasonProvider->create($entity);
+    echo $seasonProvider->create($entity);
+
 ?>

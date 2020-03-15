@@ -33,7 +33,7 @@
         }
 
         public function getSeasons() {
-           $query = $this->conn->prepare("SELECT * FROM videos WHERE entityId=:id AND isMovie =0 ORDER BY season, episode DESC");
+           $query = $this->conn->prepare("SELECT * FROM videos WHERE entityId=:id AND isMovie =0 ORDER BY season, episode ASC");
            $query->bindValue(":id", $this->getId());
 
            $query->execute();
@@ -55,6 +55,7 @@
            if(sizeof($videos) != 0 ) {
                $seasons[] = new Season($currentSeason, $videos);
            }
+           return $seasons;
         }
     }
 ?>

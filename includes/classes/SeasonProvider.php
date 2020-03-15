@@ -8,7 +8,23 @@
         }
 
         public function create($entity) {
-            $entity->getSeasons();
+            $seasons = $entity->getSeasons();
+
+            if(sizeof($seasons) == 0) {
+                return;
+            }
+
+            $seasonHtml = "";
+            foreach($seasons as $season) {
+                $seasonNumber = $season->getSeasonNumber();
+
+                $seasonHtml .= "<div class='season'> 
+                                    <h3>Season $seasonNumber</h3>
+                                </div>";
+            }
+            // var_dump($seasonHtml);
+            
+            return $seasonHtml;
         }
     }
 
