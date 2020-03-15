@@ -3,7 +3,7 @@
         public static function getEntities($conn, $categoryId, $limit) {
             $sql = "SELECT * FROM entities ";
             if($categoryId != null) {
-                $sql .= "WHERE id =:categoryId ";
+                $sql .= "WHERE categoryId=:categoryId ";
             }
 
             $sql .= "ORDER BY RAND() LIMIT :limit";
@@ -13,7 +13,7 @@
                 $query->bindValue(':categoryId', $categoryId);
             }
 
-            $query->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $query->bindValue(":limit", $limit, PDO::PARAM_INT);
 
             $query->execute();
             $result = array();

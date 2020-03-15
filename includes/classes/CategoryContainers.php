@@ -23,7 +23,35 @@
         public function getCategoryHtml($sqlData, $title, $isTvShow, $isMovie) {
             $categoryId = $sqlData['id'];
             $title = $title == null ? $sqlData["name"] : $title;
-            return $title . "<br>";
+
+            if($isTvShow && $isMovie) {
+
+                $entities = EntityProvider::getEntities($this->conn, $categoryId, (int)10);
+
+            } else if($isTvShow) {
+
+            } else {
+
+            }
+
+            if(sizeof($entities) == 0) {
+                return;
+            }
+            $preview = new PreviewProvider($this->conn, $this->userName);
+            $entitiesHtml = "";
+            foreach($entities as $entity) {
+                $entitiesHtml .= $preview->createEntityPreviewSquare($entity);
+            }
+
+            return "<div class='category'>
+                        <a href='category.php?id=$categoryId'> 
+                            <h3>$title</h3>
+                        </a>
+
+                        <div class='entities'>
+                            $entitiesHtml
+                        </div>
+                    </div>";
         }
     }
 ?>

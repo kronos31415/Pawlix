@@ -38,6 +38,19 @@
                     </div>";
         }
 
+        public function createEntityPreviewSquare($entity) {
+            $id = $entity->getId();
+            $thumbnail = $entity->getThumbnail();
+            $name = $entity->getName();
+
+            return "<a href='entity.php?id=$id'>
+            
+                        <div class='previewContainer small'>
+                            <img src='$thumbnail' name='$name'/>
+                        </div>
+                    </a>";
+        }
+
         public function getRandomEntity() {
             $entity = EntityProvider::getEntities($this->conn, null, 1);
             return $entity[0];
