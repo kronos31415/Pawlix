@@ -4,7 +4,7 @@
 
         public function __construct($conn, $userName) {
             $this->conn = $conn;
-            $this->userNAme = $userName;
+            $this->userName = $userName;
         }
 
         public function createPreviewVideo($entity) {
@@ -39,11 +39,8 @@
         }
 
         public function getRandomEntity() {
-            $query = $this->conn->prepare("SELECT * FROM entities ORDER BY RAND() LIMIT 1");
-            $query->execute();
-
-            $row = $query->fetch(PDO::FETCH_ASSOC);
-            return new Entity($this->conn, $row);
+            $entity = EntityProvider::getEntities($this->conn, null, 1);
+            return $entity[0];
         }
     }
 ?>
