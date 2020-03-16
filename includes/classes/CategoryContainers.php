@@ -20,6 +20,20 @@
             return $html . "</div>";
         }
 
+        public function showCategory($id, $title = null) {
+            $query = $this->conn->prepare("SELECT * FROM categories WHERE id=:id");
+            $query->bindValue(':id', $id);
+            $query->execute();
+
+            $html = "<div class='previewCategories noScroll'>";
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $html .= $this->getCategoryHtml($row, $title, true, true);
+            }
+
+            return $html . "</div>";
+        }
+
         public function getCategoryHtml($sqlData, $title, $isTvShow, $isMovie) {
             $categoryId = $sqlData['id'];
             $title = $title == null ? $sqlData["name"] : $title;

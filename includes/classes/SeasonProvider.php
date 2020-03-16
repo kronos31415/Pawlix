@@ -18,13 +18,44 @@
             foreach($seasons as $season) {
                 $seasonNumber = $season->getSeasonNumber();
 
+                $videoHtml = '';
+                foreach($season->getVideos() as $video) {
+                    $videoHtml .= $this->createVideoSquare($video);
+                }
+
                 $seasonHtml .= "<div class='season'> 
                                     <h3>Season $seasonNumber</h3>
+                                    <div class='videos'>
+                                        $videoHtml
+                                    </div>
                                 </div>";
             }
-            // var_dump($seasonHtml);
             
             return $seasonHtml;
+        }
+
+        private function createVideoSquare($video) {
+            $id = $video->getId();
+            $description = $video->getDescription();
+            $title = $video->getTitle();
+            $thumbNail = $video->getThumbnail();
+            $episodeNumber = $video->getEpisodeNumber();
+
+            return "<a href='watch.php?id=$id'>
+                        <div class='episodeContainer'>
+                        
+                            <div class='contents'>
+                            
+                                <img src=$thumbNail>
+                                <div class='videoInfo'>
+                                    <h3>$episodeNumber. $title</h3>
+                                    <span>$description</span>
+                                </div>
+                            </div>
+                        
+                        </div>
+            
+                    </a>";
         }
     }
 
