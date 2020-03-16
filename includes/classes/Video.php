@@ -36,6 +36,12 @@
         public function getThumbnail() {
             return $this->entity->getThumbnail();
         }
+
+        public function incrementVideo() {
+            $query = $this->conn->prepare("UPDATE videos SET views=views+1 WHERE id=:id");
+            $query->bindValue(':id', $this->getId());
+            $query->execute();
+        }
     }
 
 ?>
