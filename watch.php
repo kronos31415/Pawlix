@@ -14,7 +14,7 @@ $video->incrementVideo();
 
 
     <div class='videoControls watchNav'>
-        <button ><i class="fas fa-arrow-left"></i></button>
+        <button onclick='goToPreviousPage()'><i class="fas fa-arrow-left"></i></button>
         <h1><?php echo $video->getTitle();  ?></h1>
     </div>
 
@@ -22,3 +22,7 @@ $video->incrementVideo();
         <source src = "<?php echo $video->getFilePath(); ?>" type='video/mp4'>
     </video>
 </div>
+
+<script>
+    initialize();
+</script>
