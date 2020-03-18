@@ -24,5 +24,5 @@ $video->incrementVideo();
 </div>
 
 <script>
-    initialize();
+    initialize("<?php echo $video->getId(); ?>","<?php echo $userLoggedIn; ?>");
 </script>
