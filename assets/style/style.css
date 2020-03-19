@@ -131,6 +131,11 @@ a {
     margin: 15px 0;
 }
 
+.previewOverlay .mainDetails h4 {
+    color: #fff;
+    margin: 15px 0;
+}
+
 .previewOverlay .mainDetails {
     position: relative;
     top: 35%;

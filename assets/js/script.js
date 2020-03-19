@@ -104,12 +104,25 @@ function setStartTime(videoId, userName) {
         }
     }).done(function(response) {
         if (isNaN(response)) {
-            return
+            return;
         }
         $("video").on('canplay', function(event) {
-            console.log("tutaj")
             this.currentTime = response;
             $('video').off('canplay');
         });
     });
+}
+
+function restartVideo() {
+    $('video')[0].currentTime = 0;
+    $('video')[0].play();
+    $('.upNext').fadeOut();
+}
+
+function playNext(videoID) {
+    window.location.href = "watch.php?id=" + videoID;
+}
+
+function showUpNext() {
+    $('.upNext').fadeIn();
 }

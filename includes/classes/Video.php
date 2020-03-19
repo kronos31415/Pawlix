@@ -67,6 +67,19 @@
             return ("Season $season, Episode $episode");
         }
 
+        public function isInProgress($userName) {
+            $query = $this->conn->prepare("SELECT * FROM videoprogress WHERE userName = :userName AND videoId = :id 
+                                            AND finisched = 0");
+
+            $query->bindValue(':userName', $userName);
+            $query->bindValue(':id', $this->getId());
+
+            $query->execute();
+            if($query->rowCount() == 0) 
+                return false;
+            return true;
+
+        }
 
     }
 

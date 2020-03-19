@@ -20,15 +20,15 @@ $nextVideo = VideoProvider::getUpNext($conn, $video);
         <h1><?php echo $video->getTitle();  ?></h1>
     </div>
 
-    <div class='videoControls upNext'>
-        <button><i class="fas fa-redo-alt"></i></button>
+    <div class='videoControls upNext' style="display : none">
+        <button onclick="restartVideo();"><i class="fas fa-redo-alt"></i></button>
     
         <div class='nextContainer'>
             <h1>Next: </h1>
             <h3><?php echo $nextVideo->getTitle()?></h3>
             <h3><?php echo $nextVideo->getSeasonAndEpisode()?></h3>
 
-            <button class = 'playNext'><i class="fas fa-play"></i> PLAY</button>
+            <button class = 'playNext' onclick="playNext(<?php echo $nextVideo->getId()?>);"><i class="fas fa-play"></i> PLAY</button>
         </div>
 
 
@@ -36,7 +36,7 @@ $nextVideo = VideoProvider::getUpNext($conn, $video);
 
     
 
-    <video controls autoplay >
+    <video controls autoplay onended="showUpNext();">
         <source src = "<?php echo $video->getFilePath(); ?>" type='video/mp4'>
     </video>
 </div>

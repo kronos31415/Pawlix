@@ -26,5 +26,27 @@
             return new Video($conn, $row);
 
         }
+
+
+        public static function getEntityVideo($conn, $entityId, $userName) {
+            $query = $conn->prepare("SELECT videoId FROM videoProgress INNER JOIN videos
+                                    ON videoprogress.videoId = videos.id
+                                    AND videos.entityId = :entityId AND videoProgress.userName = :userName
+                                    ORDER BY videoProgress.dateModified DESC LIMIT 1");
+
+            $query->bindValue(':entityId', $entityId);
+            $query->bindValue(':userName', $userName);
+
+            $query->execute();
+
+            if($query->rowCount() == 0) {
+                $query = $conn->prepare("SELECT id FROM videos WHERE entityId = :entityId
+                                        ORDER BY season, episode ASC LIMIT 1");
+                $query->bindValue(':entityId', $entityId);
+                $query->execute();
+            }
+
+            return $query->fetchColumn();
+        }
     }
 ?>
