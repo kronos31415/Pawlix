@@ -106,14 +106,6 @@ function setStartTime(videoId, userName) {
         if (isNaN(response)) {
             return
         }
-        console.log(response)
-
-        // var vid = document.getElementsByTagName('video');
-        // vid[0].oncanplay = function() {
-        //     console.log("tutaj")
-        //     this.currentTime = response;
-        //     $('video').off('canplay');
-        // };
         $("video").on('canplay', function(event) {
             console.log("tutaj")
             this.currentTime = response;

@@ -8,6 +8,8 @@ if(!isset($_GET['id'])) {
 $video = new Video($conn, $_GET['id']);
 $video->incrementVideo();
 
+$nextVideo = VideoProvider::getUpNext($conn, $video);
+
 ?>
 
 <div class='watchContainer'>
@@ -17,6 +19,22 @@ $video->incrementVideo();
         <button onclick='goToPreviousPage()'><i class="fas fa-arrow-left"></i></button>
         <h1><?php echo $video->getTitle();  ?></h1>
     </div>
+
+    <div class='videoControls upNext'>
+        <button><i class="fas fa-redo-alt"></i></button>
+    
+        <div class='nextContainer'>
+            <h1>Next: </h1>
+            <h3><?php echo $nextVideo->getTitle()?></h3>
+            <h3><?php echo $nextVideo->getSeasonAndEpisode()?></h3>
+
+            <button class = 'playNext'><i class="fas fa-play"></i> PLAY</button>
+        </div>
+
+
+    </div>
+
+    
 
     <video controls autoplay >
         <source src = "<?php echo $video->getFilePath(); ?>" type='video/mp4'>

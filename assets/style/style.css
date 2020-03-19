@@ -238,7 +238,7 @@ a {
     width: 100%;
 }
 
-.videoControls.watchNav {
+.videoControls {
     position: absolute;
     display: flex;
     background-color: rgba(0, 0, 0, 0.3);
@@ -257,4 +257,22 @@ a {
     font-size: 30px;
     background-color: transparent;
     padding: 30px;
+}
+
+.upNext {
+    height: 100%;
+    justify-content: center;
+}
+
+.nextContainer button {
+    padding: 0;
+}
+
+.nextContainer h2,
+.nextContainer h3 {
+    color: #fff;
+}
+
+.watchNav {
+    z-index: 2;
 }
