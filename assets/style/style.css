@@ -219,6 +219,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 230px;
+    position: relative;
 }
 
 .episodeContainer img {
@@ -280,4 +281,50 @@ a {
 
 .watchNav {
     z-index: 2;
+}
+
+.seen {
+    color: green;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.topNav {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    padding: 0px 50px;
+    height: 80px;
+}
+
+.logoContainer {
+    height: 40px;
+}
+
+.logoContainer img {
+    height: 100%;
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.navLinks a {
+    margin-left: 10px;
+    color: #fff;
+}
+
+.rightItems {
+    text-align: right;
+    flex: 1;
+}
+
+.rightItems a {
+    color: #fff;
+    margin-left: 20px;
 }
