@@ -81,6 +81,16 @@
 
         }
 
+        function hasSeen($userName) {
+            $query = $this->conn->prepare("SELECT * FROM videoprogress 
+                                        WHERE userName = :userName AND videoId = :id AND finisched = 1");
+            $query->bindValue(':userName', $userName);
+            $query->bindValue(':id', $this->getId());
+            $query->execute();
+
+            return $query->rowCount() != 0;
+        }
+
     }
 
 ?>
