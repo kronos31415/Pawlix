@@ -20,6 +20,33 @@
             return $html . "</div>";
         }
 
+        public function showTvShowCategories() {
+            $query = $this->conn->prepare("SELECT * FROM categories");
+            $query->execute();
+
+            $html = "<div class='previewCategories'>";
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $html .= $this->getCategoryHtml($row, null, true, false);
+            }
+
+            return $html . "</div>";
+        }
+
+        public function showMoviesCategories() {
+            $query = $this->conn->prepare("SELECT * FROM categories");
+            $query->execute();
+
+            $html = "<div class='previewCategories'>";
+
+            while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $html .= $this->getCategoryHtml($row, null, true, false);
+            }
+
+            return $html . "</div>";
+        }
+
+
         public function showCategory($id, $title = null) {
             $query = $this->conn->prepare("SELECT * FROM categories WHERE id=:id");
             $query->bindValue(':id', $id);
@@ -44,7 +71,11 @@
 
             } else if($isTvShow) {
 
+                $entities = EntityProvider::getTvShows($this->conn, $categoryId, (int)10);
+
             } else {
+
+                $entities = EntityProvider::getMovies($this->conn, $categoryId, (int)10);
 
             }
 

@@ -298,6 +298,8 @@ a {
     align-items: center;
     padding: 0px 50px;
     height: 80px;
+    min-width: 1000px;
+    transition: background-color 300ms linear;
 }
 
 .logoContainer {
@@ -327,4 +329,9 @@ a {
 .rightItems a {
     color: #fff;
     margin-left: 20px;
+}
+
+.scrolled {
+    background-color: #141414;
+    transition: background-color 300ms linear;
 }

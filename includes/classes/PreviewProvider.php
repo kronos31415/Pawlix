@@ -7,6 +7,33 @@
             $this->userName = $userName;
         }
 
+        public function createTvShowPreviewVideo() {
+            $entitiesArray = EntityProvider::getTvShows($this->conn, null, 1);
+            if(sizeof($entitiesArray) == 0) {
+                ErrorMessage::show("No Tv shows available");
+            }
+
+            return $this->createPreviewVideo($entitiesArray[0]);
+        }
+
+        public function createMoviesPreviewVideo() {
+            $entitiesArray = EntityProvider::getMovies($this->conn, null, 1);
+            if(sizeof($entitiesArray) == 0) {
+                ErrorMessage::show("No Movies available");
+            }
+
+            return $this->createPreviewVideo($entitiesArray[0]);
+        }
+
+        public function createCategoryPreviewVideo($categoryId) {
+            $entitiesArray = EntityProvider::getEntities($this->conn, $categoryId, 1);
+            if(sizeof($entitiesArray) == 0) {
+                ErrorMessage::show("No Movies available");
+            }
+
+            return $this->createPreviewVideo($entitiesArray[0]);
+        }
+
         public function createPreviewVideo($entity) {
             if($entity == null) {
                 $entity = $this->getRandomEntity();
