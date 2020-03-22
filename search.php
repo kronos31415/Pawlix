@@ -1,5 +1,6 @@
 <?php
     require_once("includes/header.php");
+    require_once("includes/classes/PreviewProvider.php");
 ?>
 
 <div class='textContainer'>
@@ -19,8 +20,22 @@
         clearTimeout(timer);
 
         timer = setTimeout(function() {
-            var imie = $('.searchInput').val();
-            console.log(imie);
+            var search = $('.searchInput').val();
+            if(search != '') {
+                $.ajax({
+                    method: "POST",
+                    url: "ajax/getSearchResult.php",
+                    data: {
+                        search: search,
+                        user: user
+                    }
+                }).done(function(response) {
+                    if (response !== null && response != '')
+                    $('.searchResult').html(response);
+                });
+            } else {
+                $('.searchResult').html(ErorM);
+            }
         }, 1000);
     })
 </script>
