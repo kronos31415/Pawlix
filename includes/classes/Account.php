@@ -7,6 +7,19 @@ class Account {
         $this->conn = $conn;
     }
 
+    public function updateProfile($fn, $ln, $email, $un) {
+        $this->validateFirstName($fn);
+        $this->validateLastName($ln);
+        $this->validateNewEmail($email, $un);
+
+        if(empty($this->errorArray)) {
+            // Enter new data to dataBase
+            return true;
+        }
+        return false;
+
+    }
+
     public function register($fn, $ln, $us, $email, $email2, $pass, $pass2) {
         $this->validateFirstName($fn);
         $this->validateLastName($ln);
@@ -86,6 +99,23 @@ class Account {
         }
         $query = $this->conn->prepare("SELECT * FROM users WHERE email=:email");
         $query->bindValue(":email", $email);
+        $query->execute();
+        if($query->rowCount() != 0) {
+            array_push($this->errorArray, Constants::$emailExist);
+        }
+
+    } 
+
+    private function validateNewEmail($email, $un) {
+        
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            array_push($this->errorArray, Constants::$emailWrongFormat);
+            return;
+        }
+        $query = $this->conn->prepare("SELECT * FROM users WHERE email = :email AND userName != :username");
+        $query->bindValue(":email", $email);
+        $query->bindValue(":username", $un);
+
         $query->execute();
         if($query->rowCount() != 0) {
             array_push($this->errorArray, Constants::$emailExist);
