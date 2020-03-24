@@ -371,6 +371,10 @@ a {
     padding-bottom: 30px;
 }
 
+.formSection a {
+    color: rgb(12, 86, 170);
+}
+
 .settingsContainer form input[type="text"],
 .settingsContainer form input[type="email"],
 .settingsContainer form input[type="password"] {

@@ -87,6 +87,17 @@
 
         </form>
     </div>
+
+    <div class='formSection'>
+        <h2>Subscription</h2>
+        <?php
+            if($user->getIsSubscribed()) {
+                echo "You are already subcribed";
+            } else {
+                echo "<a href='biling.php'>Click to subscribe</a>";
+            }
+        ?>
+    </div>
 </div>
 
 
