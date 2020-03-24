@@ -386,3 +386,16 @@ a {
     background-color: #E50914;
     float: left;
 }
+
+.allertError,
+.allertSuccess {
+    margin-top: 10px;
+}
+
+.allertError {
+    color: red;
+}
+
+.allertSuccess {
+    color: white;
+}

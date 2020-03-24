@@ -13,8 +13,15 @@ class Account {
         $this->validateNewEmail($email, $un);
 
         if(empty($this->errorArray)) {
-            // Enter new data to dataBase
-            return true;
+            $query = $this->conn->prepare("UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email
+                                    WHERE userName = :un");
+
+            $query->bindValue(':firstName', $fn);
+            $query->bindValue(':lastName', $ln);
+            $query->bindValue(':email', $email);
+            $query->bindValue(':un', $un);
+
+            return $query->execute();
         }
         return false;
 
@@ -137,6 +144,41 @@ class Account {
         if(in_array($error, $this->errorArray)) {
             return "<span class='errorMessage'>" . $error . "</span>";
         }
+    }
+
+    public function getFirstError() {
+        if(!empty($this->errorArray))
+            return $this->errorArray[0];
+    }
+
+    public function updatePassword($oldPass, $pw, $pw2, $user) {
+        $this->validateOldPassword($oldPass, $user);
+        $this->validatePasswords($pw, $pw2);
+
+        if(empty($this->errorArray)) {
+            $query = $this->conn->prepare("UPDATE users SET password = :pass
+                                    WHERE userName = :un");
+            $pass = hash("sha512", $pw);
+            $query->bindValue(':pass', $pw);
+            $query->bindValue(':un', $user);
+
+            return $query->execute();
+        }
+        return false;
+
+    }
+
+    public function validateOldPassword($oldPass, $user) {
+        $pass = hash("sha512", $oldPass);
+        $query = $this->conn->prepare("SELECT * FROM users WHERE password = :pass AND userName=:user");
+        $query->bindValue(':pass', $pass);
+        $query->bindValue(':user', $user);
+        $query->execute();
+
+        if($query->rowCount() == 0) {
+            array_push($this->errorArray, Constants::$wrongPassword);
+        }
+
     }
 }
 ?>

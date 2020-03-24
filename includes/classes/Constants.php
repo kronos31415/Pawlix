@@ -11,5 +11,6 @@ class Constants {
     public static $passwordsDontMatch = "Passwords don't match";
     public static $passwordLength = "Password must be beetwene 5 and 25 signs";
     public static $wrongLogin = "Wrong password or user";
+    public static $wrongPassword= "Wrong old password";
 }
 ?>
