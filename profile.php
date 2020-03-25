@@ -1,5 +1,6 @@
 <?php
     require_once("includes/header.php");
+    require_once("includes/payPallConfig.php");
     require_once("includes/classes/Account.php");
     require_once("includes/classes/User.php");
     require_once("includes/classes/FormSanitazer.php");
@@ -7,6 +8,7 @@
 
     $detailsMessage = '';
     $passwordMessage = '';
+    $subscribeError = '';
 
     if(isset($_POST['saveDetails'])) {
         $account = new Account($conn);
@@ -49,6 +51,26 @@
 
     }
 
+    if (isset($_GET['success']) && $_GET['success'] == 'true') {
+        $token = $_GET['token'];
+        $agreement = new \PayPal\Api\Agreement();
+      
+        try {
+          // Execute agreement
+          $agreement->execute($token, $apiContext);
+        } catch (PayPal\Exception\PayPalConnectionException $ex) {
+          echo $ex->getCode();
+          echo $ex->getData();
+          die($ex);
+        } catch (Exception $ex) {
+          die($ex);
+        }
+      } else if (isset($_GET['success']) && $_GET['success'] == 'false'){
+        $subscribeError = "<div class=allertError>
+                                Something with subscription went wrong
+                            </div>";
+      }
+
 ?>
 
 <div class='settingsContainer column'>
@@ -90,6 +112,7 @@
 
     <div class='formSection'>
         <h2>Subscription</h2>
+        <div class='message'><?php echo $subscribeError; ?></div>
         <?php
             if($user->getIsSubscribed()) {
                 echo "You are already subcribed";
